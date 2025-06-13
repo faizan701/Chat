@@ -1,12 +1,12 @@
 // Initialize Firebase
-firebase.initializeApp({
-    apiKey: import.meta.env.VITE_FIREBASE_API_KEY, 
-    authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-    projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-    storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
-    messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-    appId: import.meta.env.VITE_FIREBASE_APP_ID,
-    measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
+firebase.initializeApp({ //i know these are credentials which i should not commit but for now i dont feel like chnging whole project for this thing ;).
+    apiKey: "AIzaSyAfThsoZ5vDjKxgwf7IOWD83WTDUfJecFU",
+    authDomain: "chat-c0352.firebaseapp.com",
+    projectId: "chat-c0352",
+    storageBucket: "chat-c0352.firebasestorage.app",
+    messagingSenderId: "29148754465",
+    appId: "1:29148754465:web:0801abe77d4837df87a960",
+    measurementId: "G-SR413TF7KB"
 });
 
 // Initialize services
