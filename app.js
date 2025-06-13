@@ -1,12 +1,6 @@
 // Initialize Firebase
 firebase.initializeApp({
-    apiKey: "AIzaSyAfThsoZ5vDjKxgwf7IOWD83WTDUfJecFU",
-    authDomain: "chat-c0352.firebaseapp.com",
-    projectId: "chat-c0352",
-    storageBucket: "chat-c0352.firebasestorage.app",
-    messagingSenderId: "29148754465",
-    appId: "1:29148754465:web:0801abe77d4837df87a960",
-    measurementId: "G-SR413TF7KB"
+  
 });
 
 // Initialize services
