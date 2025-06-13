@@ -1,0 +1,53 @@
+name: Deploy to Firebase Hosting
+
+on:
+  push:
+    branches:
+      - main # This workflow runs when you push to the 'main' branch
+      # If your main branch is called 'master', change 'main' to 'master' here.
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest # The type of runner that the job will run on
+
+    env: # Environment variables available during this job's execution
+      CI: true # Common for many frontend frameworks to ensure clean builds in CI
+      # Map your GitHub Secrets to environment variables for your build process.
+      # These names (e.g., VITE_FIREBASE_API_KEY) must exactly match the secret names
+      # you created in GitHub, including the 'VITE_' prefix.
+      VITE_FIREBASE_API_KEY: ${{ secrets.VITE_FIREBASE_API_KEY }}
+      VITE_FIREBASE_AUTH_DOMAIN: ${{ secrets.VITE_FIREBASE_AUTH_DOMAIN }}
+      VITE_FIREBASE_PROJECT_ID: ${{ secrets.VITE_FIREBASE_PROJECT_ID }}
+      VITE_FIREBASE_STORAGE_BUCKET: ${{ secrets.VITE_FIREBASE_STORAGE_BUCKET }}
+      VITE_FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.VITE_FIREBASE_MESSAGING_SENDER_ID }}
+      VITE_FIREBASE_APP_ID: ${{ secrets.VITE_FIREBASE_APP_ID }}
+      VITE_FIREBASE_MEASUREMENT_ID: ${{ secrets.VITE_FIREBASE_MEASUREMENT_ID }}
+      # If you use a different build tool (e.g., Create React App), change 'VITE_' to 'REACT_APP_' accordingly.
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4 # Action to check out your repository code
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4 # Action to set up Node.js environment
+        with:
+          node-version: '20' # Specify the Node.js version your project uses (e.g., '18', '20')
+          cache: 'npm' # Caches npm dependencies to speed up subsequent builds. Can be 'yarn' if you use Yarn.
+
+      - name: Install Dependencies
+        run: npm ci # Installs project dependencies (npm ci is preferred for CI environments for consistent installs).
+                    # If you use Yarn, change to 'yarn install --frozen-lockfile'.
+
+      - name: Build Project
+        run: npm run build # Executes your project's build command from package.json.
+                           # Ensure this command correctly builds your static assets (e.g., 'vite build', 'react-scripts build').
+
+      - name: Deploy to Firebase Hosting
+        uses: FirebaseExtended/action-hosting-deploy@v0 # Official Firebase Hosting GitHub Action
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}' # GitHub's built-in token for repository access (default, always available)
+          # This secret holds the Firebase service account credentials for deployment.
+          # Its name MUST be FIREBASE_SERVICE_ACCOUNT_ followed by your exact Firebase Project ID.
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_CHAT_C0352 }}'
+          channelId: live # Deploys to your live hosting channel (i.e., your main Firebase Hosting URL)
+          projectId: chat-c0352 # Your Firebase Project ID. Make sure this matches your project.
