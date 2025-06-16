@@ -1,5 +1,5 @@
 # Modern Chat Application
-
+https://faizan701.github.io/Chat/
 A real-time chat application built with HTML, CSS, JavaScript, Node.js, and Firebase. Features a modern UI/UX design with Google authentication.
 
 ## Features
